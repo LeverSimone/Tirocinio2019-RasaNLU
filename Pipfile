@@ -1,0 +1,7 @@
+[packages]
+rasa-nlu = "*"
+scikit-learn = "*"
+spacy = "*"
+scipy = "*" 
+sklearn = "*"
+sklearn_crfsuite = "*"

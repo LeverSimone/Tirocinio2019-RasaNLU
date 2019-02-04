@@ -1,0 +1,102 @@
+## intent:greet
+- hey [Gabriele](name)
+- hello [Simone](name)
+- hi [Giulia](name)
+- good morning [Giacomo](name)
+- good evening [Luigi](name)
+- hey there [Paolo](name)
+- hey [Franco](name)
+- howdy [Mario](name)
+- hey there [Michele](name)
+- hello [Giovanni](name)
+- hi [Gabriele](name)
+- good morning [Gabriele](name)
+- good evening [Gabriele](name)
+- dear sir [Gabriele](name)
+- hello, how are you [Gabriele](name)
+- how are you? [Gabriele](name)
+- how you doing [Gabriele](name)
+- hi, how are you doing? [Gabriele](name)
+- how are you doing? [Gabriele](name)
+- how's everything [Gabriele](name)
+- how are things [Gabriele](name)
+- how is life [Gabriele](name)
+- good morning [Gabriele](name)
+- good afternoon [Gabriele](name)
+- good evening [Gabriele](name)
+- nice talking to you [Gabriele](name)
+- it's a pleasure to to meet you [Gabriele](name)
+- Morning! [Gabriele](name)
+- How are things with you? [Gabriele](name)
+- What's new? [Gabriele](name)
+- What's going on [Gabriele](name)
+- It's good to meet you [Gabriele](name)
+- It's good to see you [Gabriele](name)
+- It's nice to see you [Gabriele](name)
+- Good day [Gabriele](name)
+- G'day [Gabriele](name)
+- What's up [Gabriele](name)
+- Sup [Gabriele](name)
+- Whazzup [Gabriele](name)
+- How is it going? [Gabriele](name)
+- Yo! [Gabriele](name)
+- What's happening [Gabriele](name)
+- What's happenin [Gabriele](name)
+- good to see you [Gabriele](name)
+- nice to see you [Gabriele](name)
+- long time no see [Gabriele](name)
+- it's been a while [Gabriele](name)
+- how have you been [Gabriele](name)
+- How do you do [Gabriele](name)
+- Are you OK? [Gabriele](name)
+- You alright? [Gabriele](name)
+- Alright mate? [Gabriele](name)
+
+## intent:goodbye
+- Bye
+- Bye bye
+- Goodbye
+- Good-bye
+- See you
+- So long
+- Farewell
+- May you fare well
+- See you later
+- See ye later
+- See you soon
+- Take care
+- Keep in touch
+- See you later, alligator
+- Bye bye
+- Talk to you later
+- Take it easy
+- I'm off
+- Right then, I'm off
+- I must be going
+- I've gotta get going
+- Have a nice day
+- Have a good evening
+- I'm looking forward to our next meeting
+- Nice meeting you
+- It was nice to talk you to again
+- Catch you later
+- Until next [session](period)
+- See you next [week](period)
+- See you on [Monday](period)
+- Later
+- Laters
+- Peace
+- Peace out
+- I'm out
+- I'm out of here
+- I gotta jet
+- I gotta take off
+- I gotta hit the road
+- I gotta head out
+- Smell you later
+- Read you later
+- Ciao
+- Adios
+- Au-revoir
+- Sayonara
+  
