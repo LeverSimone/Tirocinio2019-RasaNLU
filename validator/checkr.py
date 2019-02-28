@@ -1,14 +1,16 @@
 import syns
 
-resources = [{ "resource" : "proposals", "attributes" : ["topics", "price"]},
-            { "resource" : "cat", "attributes" : []}]
+RESOURCE_LIST = [[{ "resource" : "proposals", "attributes" : ["topics", "price"]},
+              { "resource" : "cat", "attributes" : []}]]
 
 def init(intents):
-  return
+  RESOURCE_LIST = []
+  RESOURCE_LIST.append(intents)
+  return len(RESOURCE_LIST)
 
 def validate(nlux, conf_id):
   # get the specific vocabulary using conf_id
-  # TBD
+  resources = RESOURCE_LIST[conf_id - 1] 
   
   # verify extracted entities
   # TODO / comments:
@@ -20,22 +22,25 @@ def validate(nlux, conf_id):
   failed = []
   for entity in nlux["entities"]:
     if (entity["entity"] == "resource"):
-      resource = match_entity(entity, lambda x : x["resource"], resources)
-      success.append(resource)
+      resource = match_entity(entity, lambda x : x["resource"], resources)      
+      if not resource:
+        failed.append(entity)
+      else:
+        success.append(resource)
       break
   
-  # we verify the attribute for the matching resource
-  for entity in nlux["entities"]:
-    if (entity["entity"] == "attribute"):
-      resource = match_entity(entity, lambda x : x, success[0].attributes)
-      success.append(resource)
-      break 
+  if success:
+    # we verify the attribute for the matching resource
+    for entity in nlux["entities"]:
+      if (entity["entity"] == "attribute"):
+        resource = match_entity(entity, lambda x : x, success[0].get("match").get("attributes"))
+        if not resource:
+          failed.append(entity)
+        else:
+          success.append(resource)
+        break
       
-  if not resource:
-    failed.append(resource)
-
-  print resource
-  nlux["matching"] = [resource]
+  nlux["matching"] = success
   nlux["matching_failed"] = failed
   return nlux
 

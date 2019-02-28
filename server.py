@@ -7,7 +7,7 @@ import os
 from validator import checkr
 import rasa
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="/console")
 app.debug = True
 
 @app.route("/parse", methods=["GET"])
@@ -23,12 +23,13 @@ def parse_command():
   q = request.args.get('q').strip()
   conf_id = request.args.get('conf').strip()
   if not q or not conf_id:
-    abort(400)
+    abort(400)  
 
   # parse the utterance using rasa
   nlx = rasa.parse_utterance(q)  
 
   # validate the user command based on vocabulary
+  conf_id = int(conf_id)
   nlv = checkr.validate(nlx, conf_id)
   return jsonify(nlv)
     
@@ -46,12 +47,13 @@ def configure_nlu():
        the configuration URI
   """  
   conf = request.json
-  if not conf or not conf.intents:
+  if not conf or not conf["intents"]:
     abort(400)
     
-  conf_id = checkr.init(conf.intents)
+  conf_id = checkr.init(conf["intents"])
 
-  return jsonify({ id : conf_id}), 201
+  return jsonify({ "id" : conf_id}), 201
+
     
   
 if __name__ == '__main__':
