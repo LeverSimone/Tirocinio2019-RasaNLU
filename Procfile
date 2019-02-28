@@ -1,1 +1,1 @@
-web: python -m spacy download en_core_web_sm; python -m spacy link en_core_web_sm en; chmod u+x train.sh && ./train.sh; python -m rasa_nlu.server -c config/components_config.yml --path projects/ --port $PORT
+web: python -m spacy download en_core_web_sm; python -m spacy link en_core_web_sm en; chmod u+x train.sh && ./train.sh; python -m nltk.downloader wordnet; python server.py
