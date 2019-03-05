@@ -7,7 +7,7 @@ import os
 from validator import checkr
 import rasa
 
-app = Flask(__name__, static_url_path="/console")
+app = Flask(__name__, static_url_path="/static")
 app.debug = True
 
 @app.route("/parse", methods=["GET"])
