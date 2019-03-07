@@ -54,7 +54,8 @@ Two endpoints are provied as described below. We are currently preparing a more 
 
 ### Configuring NLU
 Receives the definition of the operations or intents exposed by the website.
-`POST /configure
+```
+POST /configure
 Content-type: application-json
 BODY
 {
@@ -67,15 +68,16 @@ BODY
    }]
 RESPONSE
 { "id" :"[web configuration id]"}
-`
+```
 
 ### Parsing user queries
 Parses the user input in natural language, and returns the extracted intents and entities (resources and attributes), as well as the result of the validation with the correctly identified entities (`matching`) as wella s those not found in the website (`matching_failed`)
 
-`GET /parse?q=[user query]&conf=[website configuration id]
+```
+GET /parse?q=[user query]&conf=[website configuration id]
 RESPONSE:
 { "intent" : {}, "entities" : [], "matching"; [], "matching_failed" : []}
-`
+```
 
 ## Testing console
 We explose a testing console at `/static/index.html`
