@@ -52,6 +52,9 @@ def is_synonym(word1, word2):
   return word2 in s1
 
 def get_relation(word1, word2):
+  if word2 is None:
+    return "none"
+
   if word1 == word2:
     return "equal"
   
