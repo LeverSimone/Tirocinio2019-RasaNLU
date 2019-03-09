@@ -1,15 +1,23 @@
 import syns
 
-RESOURCE_LIST = []
+RESOURCE_LIST = [[{ "resource" : "proposals", "attributes" : ["topics", "price"]},
+              { "resource" : "cat", "attributes" : []}]]
 
 def init(intents):
   global RESOURCE_LIST
+  RESOURCE_LIST = []
   RESOURCE_LIST.append(intents)
   return len(RESOURCE_LIST)
+
+def takeConf_id(site):
+  for x in RESOURCE_LIST:
+    print(x)
+    print(x.site)
 
 def validate(nlux, conf_id):
   # get the specific vocabulary using conf_id
   resources = RESOURCE_LIST[conf_id - 1]
+  print("\n\nresources", resources)
   
   # verify extracted entities
   # TODO / comments:
