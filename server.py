@@ -50,7 +50,7 @@ def configure_nlu():
   if not conf or not conf["intents"]:
     abort(400) 
     
-  conf_id = checkr.init(conf["intents"])
+  conf_id = checkr.init(conf)
 
   return jsonify({ "id" : conf_id}), 201
 
@@ -68,7 +68,7 @@ def take_conf_id():
 
   conf_id = checkr.takeConf_id(site)
 
-  return jsonify({ "conf_id" : conf_id}), 201
+  return jsonify({ "id" : conf_id}), 201
   
 if __name__ == '__main__':
   # deploy as an eventlet WSGI server
