@@ -23,12 +23,12 @@ def init(intents):
 
 def takeConf_id(site):
   for posx,x in enumerate(RESOURCE_LIST):
-    if site==x['site']:
+    if site==x["site"]:
       return posx + 1
 
 def validate(nlux, conf_id):
   # get the specific vocabulary using conf_id
-  resources = RESOURCE_LIST[conf_id - 1]['intents']
+  resources = RESOURCE_LIST[conf_id - 1]["intents"]
   #print("\n\nresources", resources)
   #print(RESOURCE_LIST[conf_id - 1]['site'])
   
