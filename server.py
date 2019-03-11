@@ -30,7 +30,6 @@ def parse_command():
   nlx = rasa.parse_utterance(q)  
 
   # validate the user command based on vocabulary
-  conf_id = int(conf_id)
   nlv = checkr.validate(nlx, conf_id)
   return jsonify(nlv)
     
@@ -47,9 +46,9 @@ def configure_nlu():
   Returns:
        the configuration URI
   """  
-  conf = request.json
+  conf = request.json 
   if not conf or not conf["intents"]:
-    abort(400) 
+    abort(400)
     
   conf_id = checkr.init(conf)
 
@@ -74,8 +73,8 @@ def take_conf_id():
 if __name__ == '__main__':
   # deploy as an eventlet WSGI server
   port = int(os.environ.get('PORT', 8080))
-  client = pymongo.MongoClient("mongodb+srv://browser:dcdg45g6j@pythondb-k16qx.mongodb.net/test?retryWrites=true")
-  db = client.test
+  #client = pymongo.MongoClient("mongodb+srv://browser:dcdg45g6j@pythondb-k16qx.mongodb.net/test?retryWrites=true")
+  #db = client.test
 
   #collection = db.websites
   data = {
@@ -92,11 +91,11 @@ if __name__ == '__main__':
   ],
   "site": "http://localhost:3000/exampleonelist.html"
   }
-  websites = db.websites
+  #websites = db.websites
   #website_id = websites.insert_one(data).inserted_id
   #print("website_id", website_id)
   #obj = ObjectId('5c855f0082ea96347c077951')
-  print(websites.find_one({"site": "http://localhost:3000/exampleonelist.html"}))
+  #print(websites.find_one({"site": "http://localhost:3000/exampleonelist.html"}))
   #print(websites.find_one({"_id": obj}))
   wsgi.server(eventlet.listen(('', port)), app)    
   
