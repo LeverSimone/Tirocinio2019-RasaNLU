@@ -8,6 +8,8 @@ import os
 from validator import checkr
 import rasa
 
+DB = None
+
 app = Flask(__name__, static_url_path="/static")
 app.debug = True
 
@@ -30,7 +32,7 @@ def parse_command():
   nlx = rasa.parse_utterance(q)  
 
   # validate the user command based on vocabulary
-  nlv = checkr.validate(nlx, conf_id)
+  nlv = checkr.validate(nlx, conf_id, DB)
   return jsonify(nlv)
     
   
@@ -50,7 +52,7 @@ def configure_nlu():
   if not conf or not conf["intents"]:
     abort(400)
     
-  conf_id = checkr.init(conf)
+  conf_id = checkr.init(conf, DB)
 
   return jsonify({ "id" : conf_id}), 201
 
@@ -66,37 +68,17 @@ def take_conf_id():
   if not site:
     abort(400) 
 
-  conf_id = checkr.takeConf_id(site)
+  conf_id = checkr.takeConf_id(site, DB)
 
   return jsonify({ "id" : conf_id}), 201
   
 if __name__ == '__main__':
   # deploy as an eventlet WSGI server
   port = int(os.environ.get('PORT', 8080))
-  #client = pymongo.MongoClient("mongodb+srv://browser:dcdg45g6j@pythondb-k16qx.mongodb.net/test?retryWrites=true")
-  #db = client.test
-
-  #collection = db.websites
-  data = {
-  "intents": [
-  {
-   "component": "list",
-   "resource": "cat",
-   "attributes": [
-    "topic",
-    "hours"
-   ],
-   "tag": "ul"
-  }
-  ],
-  "site": "http://localhost:3000/exampleonelist.html"
-  }
-  #websites = db.websites
-  #website_id = websites.insert_one(data).inserted_id
-  #print("website_id", website_id)
-  #obj = ObjectId('5c855f0082ea96347c077951')
-  #print(websites.find_one({"site": "http://localhost:3000/exampleonelist.html"}))
-  #print(websites.find_one({"_id": obj}))
+  client = pymongo.MongoClient("mongodb+srv://browser:dcdg45g6j@pythondb-k16qx.mongodb.net/test?retryWrites=true")
+  DB = client.test
+  websites = DB.websites
+  #website_id = websites.insert_one({"_id": "https://www.kayak.it/flights/ROM-NYC/2019-05-02/2019-05-07?sort=bestflight_a"})
   wsgi.server(eventlet.listen(('', port)), app)    
   
 

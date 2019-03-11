@@ -1,39 +1,23 @@
 import syns
 
-RESOURCE_LIST = [{
- "intents": [
-  {
-   "component": "list",
-   "resource": "cat",
-   "attributes": [
-    "topic",
-    "hours"
-   ],
-   "tag": "ul"
-  }
- ],
- "site": "http://localhost:3000/exampleonelist.html"
-}]
+def init(intents, DB):
+  websites = DB.websites
+  website_id = websites.insert_one(intents)
+  return intents["_id"]
 
-def init(intents):
-  global RESOURCE_LIST
-  RESOURCE_LIST = []
-  RESOURCE_LIST.append(intents)
-  return intents["site"]
+def takeConf_id(site, DB):
+  websites = DB.websites
+  structure = websites.find_one({"_id": site})
+  if structure == None:
+    return None
+  else:
+    return structure["_id"]
 
-def takeConf_id(site):
-  for posx,x in enumerate(RESOURCE_LIST):
-    if site==x["site"]:
-      return x["site"]
-
-def validate(nlux, conf_id):
+def validate(nlux, conf_id, DB):
   # get the specific vocabulary using conf_id
-  #resources = RESOURCE_LIST[conf_id - 1]["intents"]
-  for posx,x in enumerate(RESOURCE_LIST):
-    if x["site"]==conf_id:
-      resources = RESOURCE_LIST[posx]["intents"]
-  #print("\n\nresources", resources)
-  #print(RESOURCE_LIST[conf_id - 1]['site'])
+  websites = DB.websites
+  structure = websites.find_one({"_id": conf_id})
+  resources = structure["intents"]
   
   # verify extracted entities
   # TODO / comments:
@@ -73,7 +57,6 @@ def match_entity(entity, fn, items):
   for res in items:
     word = fn(res)
     rel = syns.get_relation(entity[u"value"], word)
-    print rel
     if rel != "none":
       match = {"entity" : entity, "match" : res, "relation" : rel}
       break
