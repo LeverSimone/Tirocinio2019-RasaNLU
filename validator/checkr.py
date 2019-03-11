@@ -19,16 +19,19 @@ def init(intents):
   global RESOURCE_LIST
   RESOURCE_LIST = []
   RESOURCE_LIST.append(intents)
-  return len(RESOURCE_LIST)
+  return intents["site"]
 
 def takeConf_id(site):
   for posx,x in enumerate(RESOURCE_LIST):
     if site==x["site"]:
-      return posx + 1
+      return x["site"]
 
 def validate(nlux, conf_id):
   # get the specific vocabulary using conf_id
-  resources = RESOURCE_LIST[conf_id - 1]["intents"]
+  #resources = RESOURCE_LIST[conf_id - 1]["intents"]
+  for posx,x in enumerate(RESOURCE_LIST):
+    if x["site"]==conf_id:
+      resources = RESOURCE_LIST[posx]["intents"]
   #print("\n\nresources", resources)
   #print(RESOURCE_LIST[conf_id - 1]['site'])
   
