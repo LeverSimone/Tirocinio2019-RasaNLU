@@ -56,6 +56,8 @@ def match_entity(entity, fn, items):
   match = {}
   for res in items:
     word = fn(res)
+    if(isinstance(word, dict)):
+      word=word["name"]
     rel = syns.get_relation(entity[u"value"], word)
     if rel != "none":
       match = {"entity" : entity, "match" : res, "relation" : rel}
