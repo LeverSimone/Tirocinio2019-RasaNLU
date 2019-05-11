@@ -30,10 +30,13 @@ def validate(nlux, conf_id, DB):
   for entity in nlux["entities"]:
     if (entity["entity"] == "resource"):
       resource = match_entity(entity, lambda x : x["resource"], resources)      
-      if not resource:
+      category = match_entity(entity, lambda x : x["category"], resources) 
+      if not resource and not category:
         failed.append(entity)
-      else:
+      elif resource:
         success.append(resource)
+      elif category:
+        success.append(category)
       break
   
   if success:
@@ -61,6 +64,7 @@ def match_entity(entity, fn, items):
     rel = syns.get_relation(entity[u"value"], word)
     if rel != "none":
       match = {"entity" : entity, "match" : res, "relation" : rel}
+      # togli break e conta quanti match ci sono, se piu di uno, chiedi per fare disambiguate
       break
   return match    
   
