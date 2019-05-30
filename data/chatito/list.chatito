@@ -1,3 +1,5 @@
+import ./common/listcommon.chatito
+
 // List resources
 %[list_resources]('training': '40', 'testing': '40')
     ~[please?] ~[list] @[resource]
@@ -6,37 +8,21 @@
 %[list_about]('training': '40', 'testing': '40')
     ~[please?] ~[ask_information] @[resource]
 
+~[ask_information]
+    what information do we have about
+    details about
+    what can you tell me about
+    tell me about
+    information about
+    what about
+    what is a
+    properties of
+    attributes of
+
 // List summary
 %[list_summary]('training': '40', 'testing': '40')
     ~[please?] ~[list] @[resource] @[summary_op:only] @[attribute]
     ~[please?] ~[list] @[resource] @[summary_op:remove] @[attribute]
-
-@[resource]
-    ~[proposals]
-    ~[cat]
-    ~[dog]
-    ~[animals]
-    ~[song]
-    ~[cities]
-    ~[movies]
-    ~[flights]
-    ~[news]
-    ~[breaking news]
-    ~[around the world]
-    ~[sport]
-    ~[travel]
-    ~[style]
-    ~[opinion]
-    ~[top stories]
-    ~[editor’s picks]
-    ~[last news]
-
-@[attribute]
-    ~[name]
-    ~[title]
-    ~[topic]
-    ~[length]
-    ~[price]
 
 @[summary_op:only]
     ~[only]
@@ -49,12 +35,30 @@
     except
     without
 
-~[please]
-    can you
-    could you
-    please
+// List sort
+%[list_sort]('training': '40', 'testing': '40')
+    ~[please?] ~[list_sort] @[resource] ~[by] @[attribute] ~[in?] @[sort_op:ascending] ~[order]
+    ~[please?] ~[list_sort] @[resource] ~[in?] @[sort_op:ascending] ~[order] ~[by] @[attribute] 
+    ~[please?] ~[list_sort] @[resource] ~[starting from] @[sort_op:ascending] @[attribute]
+    ~[please?] ~[list_sort] @[resource] ~[by] @[attribute] ~[in?] @[sort_op:descending] ~[order]
+    ~[please?] ~[list_sort] @[resource] ~[in?] @[sort_op:descending] ~[order] ~[by] @[attribute] 
+    ~[please?] ~[list_sort] @[resource] ~[starting from] @[sort_op:descending] @[attribute]
 
-~[list]
+@[sort_op:ascending]
+    ~[ascending]
+
+@[sort_op:descending]
+    ~[descending]
+
+~[ascending]
+    ascending
+    highest
+
+~[descending]
+    descending
+    smallest
+
+~[list_sort]
     list
     read
     tell
@@ -63,14 +67,69 @@
     read me
     read the list of
     tell a list of
+    sort
+    sort the list of
 
-~[ask_information]
-    what information do we have about
-    details about
-    what can you tell me about
-    tell me about
-    information about
-    what about
-    what is a
-    properties of
-    attributes of
+// Count resources
+%[list_count]('training': '40', 'testing': '40')
+    ~[please?] ~[tell] ~[number] @[resource]
+    ~[please?] ~[count] @[resource]
+    ~[ask_count] @[resource]
+
+~[tell]
+    tell me
+    tell
+
+~[number]
+    how many 
+    the number of
+    the number
+
+~[count]
+    count
+    count the
+
+~[ask_count]
+    how many
+    what's the number
+    what's the number of
+    what's the total number
+
+// List filter
+%[list_filter]('training': '40', 'testing': '40')
+    ~[please?] ~[list] @[resource] ~[with] @[attribute] @[filter_op:equals] @[attr-value]
+    ~[please?] ~[list] @[resource] ~[with] @[attribute] @[filter_op:greater] @[attr-value]
+    ~[please?] ~[list] @[resource] ~[with] @[attribute] @[filter_op:less] @[attr-value]
+
+@[filter_op:equals]
+    ~[equals]
+
+@[filter_op:greater]
+    ~[greater]
+
+@[filter_op:less]
+    ~[less]
+
+@[attr-value]
+    ~[Luca]
+    ~[Simone]
+    ~[Giulia]
+    ~[10]
+    ~[3]
+    ~[12]
+    ~[Christopher Lane]
+    ~[comedy]
+
+~[less]
+    less
+    less than
+    lower
+    lower than
+
+~[greater]
+    greater than
+    greater
+
+~[equals]
+    equals to
+    equals

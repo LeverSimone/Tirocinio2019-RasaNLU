@@ -1,0 +1,41 @@
+@[resource]
+    ~[proposals]
+    ~[cat]
+    ~[dog]
+    ~[animals]
+    ~[song]
+    ~[cities]
+    ~[movies]
+    ~[flights]
+    ~[news]
+    ~[breaking news]
+    ~[around the world]
+    ~[sport]
+    ~[travel]
+    ~[style]
+    ~[opinion]
+    ~[top stories]
+    ~[editor’s picks]
+    ~[last news]
+
+@[attribute]
+    ~[name]
+    ~[title]
+    ~[topic]
+    ~[length]
+    ~[price]
+
+~[please]
+    can you
+    could you
+    please
+
+~[list]
+    list
+    read
+    tell
+    list me
+    tell me
+    read me
+    read the list of
+    tell a list of
