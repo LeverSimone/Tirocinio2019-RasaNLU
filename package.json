@@ -1,0 +1,22 @@
+{
+  "name": "tirocinio2019-rasanlu",
+  "version": "1.0.0",
+  "description": "NLU engine for the ConWeb browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrentoCrowdAI/conweb-nlu.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrentoCrowdAI/conweb-nlu/issues"
+  },
+  "homepage": "https://github.com/TrentoCrowdAI/conweb-nlu#readme",
+  "dependencies": {
+    "chatito": "^2.2.1"
+  }
+}
