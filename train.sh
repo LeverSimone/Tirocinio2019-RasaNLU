@@ -1,1 +1,1 @@
-python -m rasa_nlu.train -c config/components_config.yml --data data/components --project components --verbose --path projects
+python -m rasa_nlu.train -c config/components_config.yml --data data/components/rasa_dataset_training.json --project components --verbose --path projects

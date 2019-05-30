@@ -1,0 +1,76 @@
+// List resources
+%[list_resources]('training': '40', 'testing': '40')
+    ~[please?] ~[list] @[resource]
+
+// List about
+%[list_about]('training': '40', 'testing': '40')
+    ~[please?] ~[ask_information] @[resource]
+
+// List summary
+%[list_summary]('training': '40', 'testing': '40')
+    ~[please?] ~[list] @[resource] @[summary_op:only] @[attribute]
+    ~[please?] ~[list] @[resource] @[summary_op:remove] @[attribute]
+
+@[resource]
+    ~[proposals]
+    ~[cat]
+    ~[dog]
+    ~[animals]
+    ~[song]
+    ~[cities]
+    ~[movies]
+    ~[flights]
+    ~[news]
+    ~[breaking news]
+    ~[around the world]
+    ~[sport]
+    ~[travel]
+    ~[style]
+    ~[opinion]
+    ~[top stories]
+    ~[editor’s picks]
+    ~[last news]
+
+@[attribute]
+    ~[name]
+    ~[title]
+    ~[topic]
+    ~[length]
+    ~[price]
+
+@[summary_op:only]
+    ~[only]
+
+@[summary_op:remove]
+    ~[remove]
+
+~[remove]
+    exclude
+    except
+    without
+
+~[please]
+    can you
+    could you
+    please
+
+~[list]
+    list
+    read
+    tell
+    list me
+    tell me
+    read me
+    read the list of
+    tell a list of
+
+~[ask_information]
+    what information do we have about
+    details about
+    what can you tell me about
+    tell me about
+    information about
+    what about
+    what is a
+    properties of
+    attributes of

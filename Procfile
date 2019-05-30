@@ -1,1 +1,1 @@
-web: python -m spacy download en_core_web_sm; python -m spacy link en_core_web_sm en; chmod u+x train.sh && ./train.sh; python -m nltk.downloader wordnet; python server.py
+web: python -m spacy download en_core_web_sm; python -m spacy link en_core_web_sm en; npx chatito .\data\chatito\list.chatito --format=rasa --outputPath=.\data\components\; chmod u+x train.sh && ./train.sh; python -m nltk.downloader wordnet; python server.py
