@@ -78,7 +78,7 @@ if __name__ == '__main__':
   client = pymongo.MongoClient("mongodb+srv://browser:dcdg45g6j@pythondb-k16qx.mongodb.net/test?retryWrites=true")
   DB = client.test
   websites = DB.websites
-  #website_id = websites.insert_one({"_id": "https://www.kayak.it/flights/ROM-NYC/2019-05-02/2019-05-07?sort=bestflight_a"})
+  #website_id = websites.insert_one()
   wsgi.server(eventlet.listen(('', port)), app)    
   
 

@@ -75,7 +75,7 @@ def validate(nlux, conf_id, DB):
         if not resource:
           failed.append(entity)
         else:
-          success.append(resource)
+          success.append(resource[0])
         break
       
   nlux["matching"] = success
