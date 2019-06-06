@@ -17,6 +17,18 @@
     ~[top stories]
     ~[editor’s picks]
     ~[last news]
+    ~[main news]
+    ~[local edition]
+    ~[politics]
+    ~[economy]
+    ~[entertainment]
+    ~[show]
+    ~[technology]
+    ~[environment]
+    ~[healt and welness]
+    ~[sciences]
+    ~[featured]
+    ~[tech]
 
 @[attribute]
     ~[name]
@@ -24,6 +36,9 @@
     ~[topic]
     ~[length]
     ~[price]
+    ~[date]
+    ~[time]
+    ~[hour]
 
 ~[please]
     can you
