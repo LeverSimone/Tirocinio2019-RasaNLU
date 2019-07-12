@@ -21,8 +21,8 @@ import ./common/listcommon.chatito
 
 // List summary
 %[list_summary]('training': '40', 'testing': '40')
-    ~[please?] ~[list] @[resource] @[summary_op:only] @[attribute]
-    ~[please?] ~[list] @[resource] @[summary_op:remove] @[attribute]
+    ~[please?] ~[list] @[resource] @[summary_op:only] ~[with?] @[attribute]
+    ~[please?] ~[list] @[resource] @[summary_op:remove] ~[the?] @[attribute]
 
 @[summary_op:only]
     ~[only]

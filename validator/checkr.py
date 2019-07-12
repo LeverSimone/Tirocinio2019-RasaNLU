@@ -32,9 +32,9 @@ def validate(nlux, conf_id, DB):
     if (entity["entity"] == "resource"):
       resource = match_entity(entity, lambda x : x["resource"], resources, lambda x : x["category"])      
       category = match_entity(entity, lambda x : x["category"], resources, None) 
-      print(resource)
-      print("------------------")
-      print(category)
+      #print(resource)
+      #print("------------------")
+      #print(category)
       if not resource and not category:
         failed.append(entity)
       elif category:

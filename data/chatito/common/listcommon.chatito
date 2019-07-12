@@ -29,6 +29,7 @@
     ~[sciences]
     ~[featured]
     ~[tech]
+    ~[tweets]
 
 @[attribute]
     ~[name]
@@ -39,6 +40,8 @@
     ~[date]
     ~[time]
     ~[hour]
+    ~[like]
+    ~[comment]
 
 ~[please]
     can you
