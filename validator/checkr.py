@@ -3,15 +3,23 @@ import syns
 def init(intents, DB):
   websites = DB.websites
   website_id = websites.insert_one(intents)
-  return intents["_id"]
+  result = {"id": intents["_id"], "resources": set()}
+  for res in intents["intents"]:
+    result["resources"].add(res["resource"])
+  result["resources"] = list(result["resources"])
+  return result
 
-def takeConf_id(site, DB):
+def takeConf(site, DB):
   websites = DB.websites
   structure = websites.find_one({"_id": site})
   if structure == None:
     return None
   else:
-    return structure["_id"]
+    result = {"id": structure["_id"], "resources": set()}
+    for res in structure["intents"]:
+      result["resources"].add(res["resource"])
+    result["resources"] = list(result["resources"])
+    return result
 
 def validate(nlux, conf_id, DB):
   # get the specific vocabulary using conf_id
