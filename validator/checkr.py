@@ -12,13 +12,20 @@ def init(intents, DB):
 def takeConf(site, DB):
   websites = DB.websites
   structure = websites.find_one({"_id": site})
+  listResources = {"component": "list", "resources": set()}
   if structure == None:
     return None
   else:
-    result = {"id": structure["_id"], "resources": set()}
+    #let result confResult(structure)
+    result = {"id": structure["_id"], "comp_res": list()}
     for res in structure["intents"]:
-      result["resources"].add(res["resource"])
-    result["resources"] = list(result["resources"])
+      if res["component"] == "list":
+        listResources["resources"].add(res["resource"])
+      elif res["component"] == "article":
+        result["comp_res"].append({"component": "article", "resources": list()})
+    listResources["resources"] = list(listResources["resources"])
+    if len(listResources["resources"]) > 0:
+      result["comp_res"].append(listResources)
     return result
 
 def validate(nlux, conf_id, DB):
@@ -31,8 +38,7 @@ def validate(nlux, conf_id, DB):
   # TODO / comments:
   # - we are assuming only one "resource" at the moment, and this may not
   #   be the case in the future
-  # - in principle a word could match more than one resource, an we
-  #   we need a way to put a score on this, or ask the user to dissambiguate
+  print(nlux)
   success = []
   failed = []
   dissambiguate = {"category": [], "resource": None}
@@ -40,9 +46,6 @@ def validate(nlux, conf_id, DB):
     if (entity["entity"] == "resource"):
       resource = match_entity(entity, lambda x : x["resource"], resources, lambda x : x["category"])      
       category = match_entity(entity, lambda x : x["category"], resources, None) 
-      #print(resource)
-      #print("------------------")
-      #print(category)
       if not resource and not category:
         failed.append(entity)
       elif category:

@@ -70,6 +70,8 @@ def take_conf_id():
 
   conf = checkr.takeConf(site, DB)
 
+  print(conf)
+
   return jsonify({ "site" : conf}), 201
   
 if __name__ == '__main__':
