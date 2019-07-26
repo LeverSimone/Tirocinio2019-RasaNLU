@@ -1,51 +1,61 @@
 import syns
 
+def composeConf(structure):
+  listResources = {"component": "list", "resources": set()}
+  result = {"id": structure["_id"], "comp_res": list()}
+  for res in structure["intents"]:
+    if res["component"] == "list":
+      listResources["resources"].add(res["resource"])
+    elif res["component"] == "article":
+      result["comp_res"].append({"component": "article", "resources": list()})
+  listResources["resources"] = list(listResources["resources"])
+  if len(listResources["resources"]) > 0:
+    result["comp_res"].append(listResources)
+  return result
+
+
 def init(intents, DB):
   websites = DB.websites
   website_id = websites.insert_one(intents)
-  result = {"id": intents["_id"], "resources": set()}
-  for res in intents["intents"]:
-    result["resources"].add(res["resource"])
-  result["resources"] = list(result["resources"])
+  result = composeConf(intents)
   return result
 
 def takeConf(site, DB):
   websites = DB.websites
   structure = websites.find_one({"_id": site})
-  listResources = {"component": "list", "resources": set()}
   if structure == None:
     return None
   else:
-    #let result confResult(structure)
-    result = {"id": structure["_id"], "comp_res": list()}
-    for res in structure["intents"]:
-      if res["component"] == "list":
-        listResources["resources"].add(res["resource"])
-      elif res["component"] == "article":
-        result["comp_res"].append({"component": "article", "resources": list()})
-    listResources["resources"] = list(listResources["resources"])
-    if len(listResources["resources"]) > 0:
-      result["comp_res"].append(listResources)
+    result = composeConf(structure)
     return result
 
 def validate(nlux, conf_id, DB):
   # get the specific vocabulary using conf_id
   websites = DB.websites
   structure = websites.find_one({"_id": conf_id})
-  resources = structure["intents"]
-  
+  intents = structure["intents"]
+  print(intents)
+  print("----------------")
+  compatibleIntents = []
   # verify extracted entities
   # TODO / comments:
   # - we are assuming only one "resource" at the moment, and this may not
   #   be the case in the future
-  print(nlux)
+  intentUser = nlux["intent"]["name"]
+  for intent in intents:
+    if(intent["component"] in intentUser):
+      compatibleIntents.append(intent)
+  print(compatibleIntents)
+  #se compatibleIntents e' vuoto non ci sono componenti su cui applicare una determinata azione
+  if (len(compatibleIntents)== 0):
+    return {"intentNotCompatible": intentUser}
   success = []
   failed = []
   dissambiguate = {"category": [], "resource": None}
   for entity in nlux["entities"]:
     if (entity["entity"] == "resource"):
-      resource = match_entity(entity, lambda x : x["resource"], resources, lambda x : x["category"])      
-      category = match_entity(entity, lambda x : x["category"], resources, None) 
+      resource = match_entity(entity, lambda x : x["resource"], compatibleIntents, lambda x : x["category"])      
+      category = match_entity(entity, lambda x : x["category"], compatibleIntents, None) 
       if not resource and not category:
         failed.append(entity)
       elif category:

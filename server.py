@@ -31,8 +31,11 @@ def parse_command():
   # parse the utterance using rasa
   nlx = rasa.parse_utterance(q)  
 
-  # validate the user command based on vocabulary
-  nlv = checkr.validate(nlx, conf_id, DB)
+  # validate the user command based on vocabulary, call validate only with action that work on the object of MongoDB, at the moment: list_
+  if('list' in nlx["intent"]["name"]):
+    nlv = checkr.validate(nlx, conf_id, DB)
+  else:
+    nlv = {"intent": nlx["intent"]["name"]}
   return jsonify(nlv)
     
   
