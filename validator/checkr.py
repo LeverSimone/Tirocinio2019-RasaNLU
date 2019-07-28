@@ -26,7 +26,12 @@ def takeConf(site, DB):
   if structure == None:
     return None
   else:
-    result = composeConf(structure)
+    if "article-structure" not in structure["_id"]:
+      result = composeConf(structure)
+    else:
+      #result = {"id": structure["_id"], "structure": structure["intents"]}
+      result = composeConf(structure)
+      result["structure"] = structure["intents"]
     return result
 
 def validate(nlux, conf_id, DB):
@@ -34,8 +39,6 @@ def validate(nlux, conf_id, DB):
   websites = DB.websites
   structure = websites.find_one({"_id": conf_id})
   intents = structure["intents"]
-  print(intents)
-  print("----------------")
   compatibleIntents = []
   # verify extracted entities
   # TODO / comments:
