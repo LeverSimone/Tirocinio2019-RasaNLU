@@ -51,10 +51,7 @@
 
 ~[list]
     list
-    read
     tell
     list me
     tell me
-    read me
-    read the list of
     tell a list of

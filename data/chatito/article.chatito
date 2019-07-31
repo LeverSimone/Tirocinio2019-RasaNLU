@@ -1,0 +1,13 @@
+import ./common/listcommon.chatito
+
+// Read the content of an article
+%[article_read]('training': '5', 'testing': '5')
+    ~[please?] ~[read] ~[content?]
+
+~[read]
+    read
+    read me
+
+~[content]
+    the content
+    the content of the page

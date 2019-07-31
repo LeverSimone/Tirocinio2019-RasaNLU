@@ -52,59 +52,60 @@ def validate(nlux, conf_id, DB):
   #se compatibleIntents e' vuoto non ci sono componenti su cui applicare una determinata azione
   if (len(compatibleIntents)== 0):
     return {"intentNotCompatible": intentUser}
-  success = []
-  failed = []
-  dissambiguate = {"category": [], "resource": None}
-  for entity in nlux["entities"]:
-    if (entity["entity"] == "resource"):
-      resource = match_entity(entity, lambda x : x["resource"], compatibleIntents, lambda x : x["category"])      
-      category = match_entity(entity, lambda x : x["category"], compatibleIntents, None) 
-      if not resource and not category:
-        failed.append(entity)
-      elif category:
-        if (len(category) > 1):
-          count = 0
-          for cat in category:
-            if (cat["relation"] == "equal"):
-              success.append(cat)
-              break
-          if not success:
-            for cat in category:
-              dissambiguate["category"].append(cat["match"]["category"])
-            dissambiguate["resource"] = entity["value"]
-        else:
-          success.append(category[0])
-      elif resource:
-        if (len(resource) > 1):
-          count = 0
-          for res in resource:
-            if (res["relation"] == "equal"):
-              temp = res
-              count +=1
-          if (count==1):
-            success.append(temp)
-          if not success:
-            for res in resource:
-              dissambiguate["category"].append(res["category"])
-            dissambiguate["resource"] = resource[0]["match"]["resource"]
-        else:
-          success.append(resource[0])
-      break
-  
-  if success:
-    # we verify the attribute for the matching resource
+  elif "list" in intentUser:
+    success = []
+    failed = []
+    dissambiguate = {"category": [], "resource": None}
     for entity in nlux["entities"]:
-      if (entity["entity"] == "attribute"):
-        resource = match_entity(entity, lambda x : x, success[0].get("match").get("attributes"), None)
-        if not resource:
+      if (entity["entity"] == "resource"):
+        resource = match_entity(entity, lambda x : x["resource"], compatibleIntents, lambda x : x["category"])      
+        category = match_entity(entity, lambda x : x["category"], compatibleIntents, None) 
+        if not resource and not category:
           failed.append(entity)
-        else:
-          success.append(resource[0])
+        elif category:
+          if (len(category) > 1):
+            count = 0
+            for cat in category:
+              if (cat["relation"] == "equal"):
+                success.append(cat)
+                break
+            if not success:
+              for cat in category:
+                dissambiguate["category"].append(cat["match"]["category"])
+              dissambiguate["resource"] = entity["value"]
+          else:
+            success.append(category[0])
+        elif resource:
+          if (len(resource) > 1):
+            count = 0
+            for res in resource:
+              if (res["relation"] == "equal"):
+                temp = res
+                count +=1
+            if (count==1):
+              success.append(temp)
+            if not success:
+              for res in resource:
+                dissambiguate["category"].append(res["category"])
+              dissambiguate["resource"] = resource[0]["match"]["resource"]
+          else:
+            success.append(resource[0])
         break
-      
-  nlux["matching"] = success
-  nlux["matching_failed"] = failed
-  nlux["dissambiguate"] = dissambiguate
+    
+    if success:
+      # we verify the attribute for the matching resource
+      for entity in nlux["entities"]:
+        if (entity["entity"] == "attribute"):
+          resource = match_entity(entity, lambda x : x, success[0].get("match").get("attributes"), None)
+          if not resource:
+            failed.append(entity)
+          else:
+            success.append(resource[0])
+          break
+        
+    nlux["matching"] = success
+    nlux["matching_failed"] = failed
+    nlux["dissambiguate"] = dissambiguate
   return nlux
 
 

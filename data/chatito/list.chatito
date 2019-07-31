@@ -136,10 +136,10 @@ import ./common/listcommon.chatito
     equals to
     equals
 
-// Read more element of the list
-%[read_more]('training': '40', 'testing': '40')
-    ~[please?] ~[read] @[resource?]
+// Show more element of the list
+%[show_more]('training': '40', 'testing': '40')
+    ~[please?] ~[show] @[resource?]
 
-~[read]
-    read 
-    read more
+~[show]
+    show 
+    show more
