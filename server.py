@@ -31,7 +31,7 @@ def parse_command():
   # parse the utterance using rasa
   nlx = rasa.parse_utterance(q)  
 
-  # validate the user command based on vocabulary, call validate only with action that work on the object of MongoDB, at the moment: list_
+  # validate the user command based on vocabulary, will call validate only with action that work on the object of MongoDB, at the moment: list_
   if('list' in nlx["intent"]["name"]):
     nlv = checkr.validate(nlx, conf_id, DB)
   else:
@@ -59,7 +59,7 @@ def configure_nlu():
 
   return jsonify({ "site" : conf}), 201
 
-@app.route("/site", methods=["GET"])
+@app.route("/site_article", methods=["GET"])
 def take_conf_id():
   """ Get the site's conf_id if it is already learned
   Args:
@@ -71,15 +71,11 @@ def take_conf_id():
   if not site:
     abort(400) 
 
-  print(site)
-
   conf = checkr.takeConf(site, DB)
-
-  print(conf)
 
   return jsonify({ "site" : conf}), 201
 
-@app.route("/sites", methods=["GET"])
+@app.route("/site", methods=["GET"])
 def take_conf_multiple_sites():
   """ Get the site's conf_id if it is already learned
   Args:
@@ -92,9 +88,6 @@ def take_conf_multiple_sites():
     abort(400)
 
   confs = checkr.takeConfs(site, DB)
-
-  print("-------------")
-  print(confs)
 
   return jsonify({ "site" : confs}), 201
   

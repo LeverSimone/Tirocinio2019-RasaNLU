@@ -36,7 +36,6 @@ def siteMatchFunc (structures, originalLink):
   index = 0
   countMatch = 0
   countMax = 0
-  print(structures[0])
   for structure in structures:
     for idx, character in enumerate(structure["_id"]):
       if (idx < len(originalLink)):
@@ -65,11 +64,8 @@ def takeConfs(site, DB):
     if structures.count() == 0:
       return None
     else:
-      print(structures.count())
       siteConf = siteMatchFunc(structures, site)
       if(siteConf != None):
-        #inserisco il vero link chiesto dall'utente al posto del link dell'oggetto trovato compatibile
-        #siteConf["_id"] = site
         result = composeConf(siteConf)
   return result
 
@@ -87,7 +83,6 @@ def validate(nlux, conf_id, DB):
   for intent in intents:
     if(intent["component"] in intentUser):
       compatibleIntents.append(intent)
-  print(compatibleIntents)
   #se compatibleIntents e' vuoto non ci sono componenti su cui applicare una determinata azione
   if (len(compatibleIntents)== 0):
     return {"intentNotCompatible": intentUser}
