@@ -26,13 +26,52 @@ def takeConf(site, DB):
   if structure == None:
     return None
   else:
-    if "article-structure" not in structure["_id"]:
-      result = composeConf(structure)
-    else:
-      #result = {"id": structure["_id"], "structure": structure["intents"]}
-      result = composeConf(structure)
-      result["structure"] = structure["intents"]
+    result = composeConf(structure)
+    #with article-structure we need to send the complete structure of the site to check if the site requested is an article with Puppeteer
+    result["structure"] = structure["intents"]
     return result
+
+def siteMatchFunc (structures, originalLink):
+  siteMatch = -1
+  index = 0
+  countMatch = 0
+  countMax = 0
+  print(structures[0])
+  for structure in structures:
+    for idx, character in enumerate(structure["_id"]):
+      if (idx < len(originalLink)):
+        if (character == originalLink[idx]):
+          countMatch+=1
+    if (countMatch > countMax):
+      countMax = countMatch
+      siteMatch = structure
+    index+=1
+  if siteMatch < 0:
+    return None
+  else: 
+    return siteMatch
+
+def takeConfs(site, DB):
+  websites = DB.websites
+  #cerco il link esatto
+  structure = websites.find_one({"_id": site})
+  if structure!=None:
+    result = composeConf(structure)
+  elif structure==None:
+    #link esatto non trovato, restituisco le struttura in cui il link fa maggiormente matching
+    posSlash = site.index("/", 8)
+    domainSite = site[:posSlash]
+    structures = websites.find({"$and": [{"_id": {"$regex": domainSite}}, {"multiple": "true"}]})
+    if structures.count() == 0:
+      return None
+    else:
+      print(structures.count())
+      siteConf = siteMatchFunc(structures, site)
+      if(siteConf != None):
+        #inserisco il vero link chiesto dall'utente al posto del link dell'oggetto trovato compatibile
+        #siteConf["_id"] = site
+        result = composeConf(siteConf)
+  return result
 
 def validate(nlux, conf_id, DB):
   # get the specific vocabulary using conf_id

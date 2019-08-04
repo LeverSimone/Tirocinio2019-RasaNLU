@@ -71,11 +71,32 @@ def take_conf_id():
   if not site:
     abort(400) 
 
+  print(site)
+
   conf = checkr.takeConf(site, DB)
 
   print(conf)
 
   return jsonify({ "site" : conf}), 201
+
+@app.route("/sites", methods=["GET"])
+def take_conf_multiple_sites():
+  """ Get the site's conf_id if it is already learned
+  Args:
+      site : site you want the conf_id
+  Returns:
+      { conf_id : conf_id }
+  """
+  site = request.args.get('site').strip()
+  if not site:
+    abort(400)
+
+  confs = checkr.takeConfs(site, DB)
+
+  print("-------------")
+  print(confs)
+
+  return jsonify({ "site" : confs}), 201
   
 if __name__ == '__main__':
   # deploy as an eventlet WSGI server
