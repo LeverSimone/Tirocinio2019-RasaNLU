@@ -36,6 +36,8 @@ def parse_command():
     nlv = checkr.validate(nlx, conf_id, DB)
   else:
     nlv = {"intent": nlx["intent"]["name"]}
+    if ('open_element' == nlx["intent"]["name"] and nlx["entities"][0]):
+      nlv['position'] = nlx["entities"][0]["value"]
   return jsonify(nlv)
     
   
