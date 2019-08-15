@@ -145,8 +145,8 @@ import ./common/listcommon.chatito
     show more
 
 // Open an element of the list
-%[open_element]('training': '30', 'testing': '30')
-    ~[please?] ~[open] ~[the?] ~[element] ~[number] @[position]
+%[open_element]('training': '40', 'testing': '40')
+    ~[please?] ~[open] ~[the?] ~[element?] ~[number?] @[position]
 
 @[position]
     ~[3]
