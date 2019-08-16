@@ -34,8 +34,10 @@ def parse_command():
   # validate the user command based on vocabulary, will call validate only with action that work on the object of MongoDB, at the moment: list_
   if('list' in nlx["intent"]["name"]):
     nlv = checkr.validate(nlx, conf_id, DB)
+  elif('go_site' in nlx["intent"]["name"]):
+    nlv = nlx
   else:
-    nlv = {"intent": nlx["intent"]["name"]}
+    nlv = {"intent": nlx["intent"]}
     if ('open_element' == nlx["intent"]["name"] and nlx["entities"][0]):
       nlv['position'] = nlx["entities"][0]["value"]
   return jsonify(nlv)
