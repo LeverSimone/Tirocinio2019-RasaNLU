@@ -58,7 +58,10 @@ def takeConfs(site, DB):
     result = composeConf(structure)
   elif structure==None:
     #link esatto non trovato, restituisco le struttura in cui il link fa maggiormente matching
-    posSlash = site.index("/", 8)
+    try:
+      posSlash = site.index("/", 8)
+    except:
+      posSlash = len(site)-1
     domainSite = site[:posSlash]
     structures = websites.find({"$and": [{"_id": {"$regex": domainSite}}, {"multiple": "true"}]})
     if structures.count() == 0:
