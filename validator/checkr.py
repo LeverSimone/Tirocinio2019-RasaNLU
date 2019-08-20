@@ -50,6 +50,16 @@ def siteMatchFunc (structures, originalLink):
   else: 
     return siteMatch
 
+def takeLink(siteWord, DB):
+  websites = DB.websites
+  #cerco se esiste un link contenente quella parola
+  structure = websites.find_one({"$and": [{"_id": {"$regex": siteWord}}, {"homepage": "true"}]})
+  if structure!=None:
+    result = structure["_id"]
+  else:
+    result = None
+  return result
+
 def takeConfs(site, DB):
   websites = DB.websites
   #cerco il link esatto
@@ -154,7 +164,7 @@ def match_entity(entity, fn, items, fnCat):
       word=word["name"]
     rel = syns.get_relation(entity[u"value"], word)
     if rel != "none":
-      if fnCat and res["category"]:
+      if fnCat and hasattr(res, "category"):
         match.append({"entity" : entity, "match" : res, "relation" : rel, "category": fnCat(res)})
       else:
         match.append({"entity" : entity, "match" : res, "relation" : rel})

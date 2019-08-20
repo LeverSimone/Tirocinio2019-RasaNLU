@@ -94,6 +94,22 @@ def take_conf_multiple_sites():
   confs = checkr.takeConfs(site, DB)
 
   return jsonify({ "site" : confs}), 201
+
+@app.route("/wordtosite", methods=["GET"])
+def take_link_from_word():
+  """ Get the site's conf_id if it is already learned
+  Args:
+      word : word of a site, like cnn
+  Returns:
+      { conf_id : conf_id }
+  """
+  siteWord = request.args.get('site').strip()
+  if not siteWord:
+    abort(400)
+
+  link = checkr.takeLink(siteWord, DB)
+
+  return jsonify({ "link" : link}), 201
   
 if __name__ == '__main__':
   # deploy as an eventlet WSGI server
