@@ -164,7 +164,7 @@ def match_entity(entity, fn, items, fnCat):
       word=word["name"]
     rel = syns.get_relation(entity[u"value"], word)
     if rel != "none":
-      if fnCat and hasattr(res, "category"):
+      if fnCat and res["category"]:
         match.append({"entity" : entity, "match" : res, "relation" : rel, "category": fnCat(res)})
       else:
         match.append({"entity" : entity, "match" : res, "relation" : rel})
