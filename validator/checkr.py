@@ -8,6 +8,10 @@ def composeConf(structure):
       listResources["resources"].add(res["resource"])
     elif res["component"] == "article":
       result["comp_res"].append({"component": "article", "resources": list()})
+    elif res["component"] == "form":
+      resource = list()
+      resource.append(res["resource"])
+      result["comp_res"].append({"component": "form", "resources": resource})
   listResources["resources"] = list(listResources["resources"])
   if len(listResources["resources"]) > 0:
     result["comp_res"].append(listResources)

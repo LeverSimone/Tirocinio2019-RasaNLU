@@ -11,3 +11,7 @@ import ./common/listcommon.chatito
 @[type]
     ~[search]
     ~[datiutente]
+
+~[form]
+    form
+    forms
