@@ -170,6 +170,39 @@ def match_entity(entity, fn, items, fnCat):
       else:
         match.append({"entity" : entity, "match" : res, "relation" : rel})
   return match    
+
+def validateForm(nlux, conf_id, DB):
+  # get the specific vocabulary using conf_id
+  websites = DB.websites
+  structure = websites.find_one({"_id": conf_id})
+  if structure is not None:
+    intents = structure["intents"]
+    compatibleIntents = []
+    intentUser = nlux["intent"]["name"]
+    for intent in intents:
+      if(intent["component"] in intentUser):
+        compatibleIntents.append(intent)
+    #se compatibleIntents e' vuoto non ci sono componenti su cui applicare una determinata azione
+    if (len(compatibleIntents)== 0):
+      return {"intentNotCompatible": intentUser}
+    elif "form" in intentUser:
+      success = []
+      failed = []
+      #controllo che l'entities trovata da Rasa sia di tipo type (nome usato per definire search, datiutente ecc.)
+      for entity in nlux["entities"]:
+        if (entity["entity"] == "type"):
+          resource = match_entity(entity, lambda x : x["resource"], compatibleIntents, None)      
+          print("resource:")
+          print(resource)
+          if not resource:
+            failed.append(entity)
+          else:
+            success.append(resource[0])
+          break
+          
+      nlux["matching"] = success
+      nlux["matching_failed"] = failed
+  return nlux
   
 
   

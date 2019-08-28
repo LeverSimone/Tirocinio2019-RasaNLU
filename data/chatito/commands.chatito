@@ -17,9 +17,9 @@ import ./common/listcommon.chatito
 
 // Go to the site
 %[go_site]('training': '20', 'testing': '10')
-    ~[please?] ~[go] ~[to?] @[site]
+    ~[please?] ~[open] ~[to?] @[site]
 
-~[go]
+~[open]
     browse
     go
     search

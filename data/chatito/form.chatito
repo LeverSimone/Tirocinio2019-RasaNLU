@@ -1,0 +1,13 @@
+import ./common/listcommon.chatito
+
+// Go back to the previous page
+%[form_go]('training': '27', 'testing': '5')
+    ~[please?] ~[go] ~[to?] @[type] ~[form]
+
+~[go]
+    go
+    open
+
+@[type]
+    ~[search]
+    ~[datiutente]
