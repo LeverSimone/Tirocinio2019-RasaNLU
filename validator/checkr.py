@@ -208,6 +208,25 @@ def validateForm(nlux, conf_id, DB):
       nlux["matching_failed"] = failed
   return nlux
   
-
+def validateArticleRead(nlux, conf_id, DB):
+  # get the specific vocabulary using conf_id
+  structureToSend = {"intent": {"name": "article_read"}, "title": None, "text": []}
+  websites = DB.websites
+  structure = websites.find_one({"_id": conf_id})
+  if structure is not None:
+    intents = structure["intents"]
+    compatibleIntents = []
+    intentUser = nlux["intent"]["name"]
+    for intent in intents:
+      if(intent["component"] in intentUser):
+        compatibleIntents.append(intent)
+    #se compatibleIntents e' vuoto non ci sono componenti su cui applicare una determinata azione
+    if (len(compatibleIntents)== 0):
+      return {"intentNotCompatible": intentUser}
+    elif "article" in intentUser:
+      intents = structure["intents"]
+      structureToSend["title"] = compatibleIntents[0]["attributes"][0]["selector"]
+      structureToSend["text"] = compatibleIntents[0]["selector"]["container"]
+  return structureToSend
   
 

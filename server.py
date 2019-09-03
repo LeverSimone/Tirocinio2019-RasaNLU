@@ -36,6 +36,8 @@ def parse_command():
     nlv = checkr.validate(nlx, conf_id, DB)
   elif('form_go' in nlx["intent"]["name"]):
     nlv = checkr.validateForm(nlx, conf_id, DB)
+  elif('article_read' in nlx["intent"]["name"]):
+    nlv = checkr.validateArticleRead(nlx, conf_id, DB)
   elif('go_site' in nlx["intent"]["name"]):
     nlv = nlx
   else:
