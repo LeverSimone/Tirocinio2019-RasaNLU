@@ -16,7 +16,7 @@ import ./common/listcommon.chatito
     page
 
 // Go to the site
-%[go_site]('training': '20', 'testing': '10')
+%[go_site]('training': '25', 'testing': '5')
     ~[please?] ~[open] ~[to?] @[site]
 
 ~[open]
@@ -32,3 +32,4 @@ import ./common/listcommon.chatito
     ~[twitter]
     ~[repubblica]
     ~[twitter barcellona]
+    ~[google]
