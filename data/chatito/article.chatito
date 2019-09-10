@@ -1,7 +1,7 @@
 import ./common/listcommon.chatito
 
 // Read the content of an article
-%[article_read]('training': '5', 'testing': '5')
+%[article_read]('training': '9', 'testing': '1')
     ~[please?] ~[read] ~[content?]
 
 ~[read]

@@ -40,18 +40,30 @@ def siteMatchFunc (structures, originalLink):
   index = 0
   countMatch = 0
   countMax = 0
+  minlenghtStructureURL = 100000
   for structure in structures:
+    lenghtStructureURL = len(structure["_id"])
+    countMatch = 0
     for idx, character in enumerate(structure["_id"]):
       if (idx < len(originalLink)):
         if (character == originalLink[idx]):
           countMatch+=1
-    if (countMatch > countMax):
+    if (countMatch > countMax or (countMatch == countMax and minlenghtStructureURL > lenghtStructureURL)):
       countMax = countMatch
       siteMatch = structure
+      minlenghtStructureURL = len(structure["_id"])
+      print("countMax")
+      print(countMax)
+      print("siteMatch")
+      print(siteMatch)
+      print("minlenghtStructureURL")
+      print(minlenghtStructureURL)
     index+=1
   if siteMatch < 0:
     return None
-  else: 
+  else:
+    print("siteMatch definitivo")
+    print(siteMatch)
     return siteMatch
 
 def takeLink(siteWord, DB):

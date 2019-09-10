@@ -145,10 +145,12 @@ import ./common/listcommon.chatito
     show more
 
 // Open an element of the list
-%[open_element]('training': '40', 'testing': '40')
+%[open_element]('training': '70', 'testing': '40')
     ~[please?] ~[open] ~[the?] ~[element?] ~[number?] @[position]
+    ~[open] @[position]
 
 @[position]
+    ~[1]
     ~[3]
     ~[5]
     ~[10]
@@ -163,26 +165,17 @@ import ./common/listcommon.chatito
     movies
     flights
     news
-    breaking news
-    around the world
     sport
     travel
     style
     opinion
-    top stories
-    editor’s picks
-    last news
-    main news
-    local edition
     politics
     economy
     entertainment
     show
     technology
     environment
-    healt and welness
     sciences
     featured
     tech
     tweets
-    top stories
